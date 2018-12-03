@@ -8,9 +8,11 @@ import os
 app = Flask('kayenta-tester')
 c = Counter('requests', 'Number of requests served, by http code', ['http_code'])
 g = Gauge('rate_requests', 'Rate of success requests')
+
 responce_500 = 0
 responce_200 = 0
 rate_responce = 0
+
 @app.route('/')
 def hello():
     global responce_500
@@ -28,8 +30,6 @@ def hello():
         rate_responce = responce_500 / (responce_500+responce_200) * 100
         g.set(rate_responce)
         return "Hello World!\n"
-
-#cc = rate_counter('requests_rate', 'Number of requests rate served, by http code', ['rate_counter'])
 
 start_http_server(8000)
 app.run(host = '0.0.0.0', port = 8080)
