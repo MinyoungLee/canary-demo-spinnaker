@@ -389,7 +389,7 @@
                 "beginCanaryAnalysisAfterMins": "0",
                 "canaryAnalysisIntervalMins": "1",
                 "canaryConfigId": "7c789f8c-eab2-4284-b733-0a0f515fdb82",
-                "lifetimeDuration": "PT0H5M",
+                "lifetimeDuration": "PT0H3M",
                 "metricsAccountName": "my-prometheus",
                 "scopes": [
                     {
@@ -397,9 +397,7 @@
                         "controlScope": "baseline",
                         "experimentLocation": "default",
                         "experimentScope": "canary",
-                        "extendedScopeParams": {
-                            "perSeriesAligner": "ALIGN_RATE"
-                        },
+                        "extendedScopeParams": {},
                         "scopeName": "default",
                         "step": 60
                     }
@@ -423,5 +421,5 @@
         }
     ],
     "triggers": [],
-    "updateTs": "1543837149000"
+    "updateTs": "1543849895000"
 }
