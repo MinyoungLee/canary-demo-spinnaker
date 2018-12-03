@@ -2,11 +2,11 @@
 
 from random import randrange
 from flask import Flask
-from prometheus_client import start_http_server, Gauge
+from prometheus_client import start_http_server, Gauge, Counter
 import os
 
 app = Flask('kayenta-tester')
-#c = Counter('requests', 'Number of requests served, by http code', ['http_code'])
+c = Counter('requests', 'Number of requests served, by http code', ['http_code'])
 g = Gauge('rate_requests', 'Rate of success requests')
 responce_500 = 0
 responce_200 = 0
@@ -17,13 +17,13 @@ def hello():
     global responce_200
     global rate_responce
     if randrange(1, 100) > int(os.environ['SUCCESS_RATE']):
-        #c.labels(http_code='500').inc()
+        c.labels(http_code='500').inc()
         responce_500 = responce_500 + 1
         rate_responce = responce_500 / (responce_500+responce_200) * 100
         g.set(rate_responce)
         return "Internal Server Error\n", 500
     else:
-        #c.labels(http_code = '200').inc()
+        c.labels(http_code = '200').inc()
         responce_200 = responce_200 + 1
         rate_responce = responce_500 / (responce_500+responce_200) * 100
         g.set(rate_responce)
